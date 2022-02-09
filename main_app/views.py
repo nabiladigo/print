@@ -4,7 +4,7 @@ from django.views.generic import DetailView
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View 
-from .models import Print, Card
+from .models import Print
 
 
 
