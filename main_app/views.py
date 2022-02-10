@@ -4,12 +4,12 @@ from django.views.generic import DetailView
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View 
-from .models import Print
+from .models import Print, Card, Mug, Photo, Puzzle
 
 
 
-class Home(TemplateView):
-    template_name = "home.html"
+# class Home(TemplateView):
+#     template_name = "home.html"
 
 class About(TemplateView):
     template_name = "about.html"
@@ -53,3 +53,43 @@ class PrintDelete(DeleteView):
     template_name = "print_delete_confirmation.html"
     success_url = "/prints/"
 
+
+class CardCreate(View):
+    
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        image = request.POST.get("image")
+        price = request.POST.get("price")
+        print = Print.objects.get(pk=pk)
+        Card.objects.create(name=name, image=image, price = price , print=print)
+        return redirect('print_detail', pk=pk)
+
+class MugCreate(View):
+    
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        image = request.POST.get("image")
+        price = request.POST.get("price")
+        print = Print.objects.get(pk=pk)
+        Mug.objects.create(name=name, image=image, price = price , print=print)
+        return redirect('print_detail', pk=pk)
+
+class PhotoCreate(View):
+    
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        image = request.POST.get("image")
+        price = request.POST.get("price")
+        print = Print.objects.get(pk=pk)
+        Photo.objects.create(name=name, image=image, price = price , print=print)
+        return redirect('print_detail', pk=pk)
+
+class PuzzleCreate(View):
+    
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        image = request.POST.get("image")
+        price = request.POST.get("price")
+        print = Print.objects.get(pk=pk)
+        Puzzle.objects.create(name=name, image=image, price = price , print=print)
+        return redirect('print_detail', pk=pk)
