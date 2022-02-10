@@ -25,3 +25,33 @@ class Card(models.Model):
     def __str__(self):
         return self.name
      
+class Mug(models.Model):
+    
+    name = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
+    price = models.IntegerField(default=0)
+    print = models.ForeignKey(Print, on_delete= models.CASCADE, related_name= "mugs")
+    
+    def __str__(self):
+        return self.name
+     
+class Photo(models.Model):
+    
+    name = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
+    price = models.IntegerField(default=0)
+    print = models.ForeignKey(Print, on_delete= models.CASCADE, related_name= "photos")
+    
+    def __str__(self):
+        return self.name
+     
+class Puzzle(models.Model):
+    
+    name = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
+    price = models.IntegerField(default=0)
+    print = models.ForeignKey(Print, on_delete= models.CASCADE, related_name= "puzzles")
+    
+    def __str__(self):
+        return self.name
+     

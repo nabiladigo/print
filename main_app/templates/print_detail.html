@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
+
 <div class="detail__img">
     <img src="{{print.image}}" alt="{{print.name}}" />
 </div>
@@ -15,19 +16,38 @@
     <h1 class="title">{{print.name}}</h1>
 </div>
 <div class="detail__container">
+
+    <div class="detail__songs mb-5">
+        {% for card in print.cards.all %}
+        <div class="song">
+            <!-- <span>{{forloop.counter}}</span> -->
+            <figure class="image is-square">
+                <img src="{{card.image}}" alt="{{card.name}}" />
+            </figure>
+            <span><b>{{card.name}}</b></span><br>
+            <span>${{card.price}}</span>
+        </div>
+		{% empty %}
+        <article class="message">
+            <div class="message-header">
+                <p>No Cards Available</p>
+            </div>
+        </article>
+
+        {% endfor %}
+    </div>
     <div class="buttons">
+    </a>
         <a href="{% url 'print_update' print.pk %}" class="button is-info">
             <span class="icon">
-                <i class="fas fa-edit"></i>
+              <i class="fas fa-edit"></i>
             </span>
-        </a>
-        <a href="{% url 'print_delete' print.pk%}" class="button is-danger">
-            <span class="icon">
-                <i class="fas fa-trash-alt"></i>
-            </span>
+        <a href="{% url 'print_delete' print.pk %}" class="button is-danger">
+          <span class="icon">
+            <i class="fas fa-trash-alt"></i>
+          </span>
         </a>
     </div>
-    
-</div>
 
+</div>
 {% endblock %}
