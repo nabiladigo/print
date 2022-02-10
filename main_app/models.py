@@ -14,3 +14,14 @@ class Print(models.Model):
 
     class Meta:
         ordering = ['name']
+
+class Card(models.Model):
+    
+    name = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
+    price = models.IntegerField(default=0)
+    print = models.ForeignKey(Print, on_delete= models.CASCADE, related_name= "cards")
+    
+    def __str__(self):
+        return self.name
+     

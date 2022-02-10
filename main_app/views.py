@@ -16,6 +16,7 @@ class About(TemplateView):
 
 class PrintList(TemplateView):
     template_name = "print_list.html"
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
@@ -24,15 +25,16 @@ class PrintList(TemplateView):
             context["header"] = f"Searching for {name}"
         else:
             context["prints"] = Print.objects.all()
-            context["header"] = "Trending Artists"
+            context["header"] = "Trending Prints"
         return context
 
 class PrintCreate(CreateView):
     model = Print
     fields = ['name', 'image', 'price']
-    template_name = "artist_create.html"
+    template_name = "print_create.html"
+
     def get_success_url(self):
-        return reverse('artist_detail', kwargs={'pk': self.object.pk})
+        return reverse('print_detail', kwargs={'pk': self.object.pk})
 
 class PrintDetail(DetailView):
     model = Print
@@ -40,8 +42,9 @@ class PrintDetail(DetailView):
 
 class PrintUpdate(UpdateView):
     model = Print
-    fields = ['name', 'img', 'price']
+    fields = ['name', 'image', 'price', 'verified_print']
     template_name = "print_update.html"
+
     def get_success_url(self):
         return reverse('print_detail', kwargs={'pk': self.object.pk})
 
