@@ -98,17 +98,3 @@ class PuzzleCreate(View):
         print = Print.objects.get(pk=pk)
         Puzzle.objects.create(name=name, image=image, price = price , print=print)
         return redirect('print_detail', pk=pk)
-
-# class GiftSet(models.Model):
-#     title = models.CharField(max_Length=100)
-#     card = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
-#     mug = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
-#     photo = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
-#     puzzle = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
-     
-#     def __str__(self):
-#         return self.title        
-
-
-
-        # models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
