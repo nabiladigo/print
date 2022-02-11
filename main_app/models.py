@@ -1,5 +1,5 @@
-from turtle import title
 from django.db import models
+
 
 
 class Print(models.Model):
@@ -55,13 +55,18 @@ class Puzzle(models.Model):
     
     def __str__(self):
         return self.name
+
+
+
      
 class GiftSet(models.Model):
-    title = models.CharField(max_Length=100)
-    card = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
-    mug = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
-    photo = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
-    puzzle = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
+    title = models.CharField(max_length=150)
+    price = models.IntegerField(default=0)
+    cards = models.ManyToManyField(Card)
+    mugs = models.ManyToManyField(Mug)
+    photos = models.ManyToManyField(Photo)
+    puzzles = models.ManyToManyField(Puzzle)
+
      
     def __str__(self):
         return self.title

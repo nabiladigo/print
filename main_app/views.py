@@ -4,12 +4,17 @@ from django.views.generic import DetailView
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View 
-from .models import Print, Card, Mug, Photo, Puzzle
+from .models import Print, Card, Mug, Photo, Puzzle, GiftSet
 
 
 
-# class Home(TemplateView):
-#     template_name = "home.html"
+class Home(TemplateView):
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)
+        context["giftsets"] = GiftSet.objects.all()
+        return context
 
 class About(TemplateView):
     template_name = "about.html"
@@ -93,3 +98,17 @@ class PuzzleCreate(View):
         print = Print.objects.get(pk=pk)
         Puzzle.objects.create(name=name, image=image, price = price , print=print)
         return redirect('print_detail', pk=pk)
+
+# class GiftSet(models.Model):
+#     title = models.CharField(max_Length=100)
+#     card = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
+#     mug = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
+#     photo = models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
+#     puzzle = models.ForeignKey(Card, on_delete= models.CASCADE, blank=True, related_name ="giftset")
+     
+#     def __str__(self):
+#         return self.title        
+
+
+
+        # models.ForeignKey(Card, on_delete= models.CASCADE, blank= True, related_name ="giftset")
