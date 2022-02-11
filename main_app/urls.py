@@ -14,3 +14,5 @@ urlpatterns = [
     path('prints/<int:pk>/puzzles/new/', views.PuzzleCreate.as_view(), name="puzzle_create"),
 
 ]
+
+
